@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Pokedex</title>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <div class="main">
+            <h2>Pokedex</h2>
+
+            <div class="pokemon-boxes">
+
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                
+            </div><!--pokemon-boxes-->
+
+        </div>
+
+        <script>
+                //requisicao na api pokemon, para recuperar 10 pokemons
+              fetch('https://pokeapi.co/api/v2/pokemon?limit=10') //
+                .then(response => response.json())
+                .then(allpokemon => console.log(allpokemon))
+
+                //prox capitulo faz de forma dinamica colocando os pokemons na pagina web
+        </script>
+
+    </body>
+</html>

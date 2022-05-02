@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Pokedex</title>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <div class="main">
+            <h2>Pokedex</h2>
+            <br/>
+            <input id="quantidade" style="width:100%;height:40px;padding-left: 10px;" type="text" name="quantidade" placeholder="Insira a quantidade de pokemons..." />
+            <div class="pokemon-boxes">
+       
+                
+            </div><!--pokemon-boxes-->
+
+        </div>
+
+        <script>
+            var quantidade = document.getElementById('quantidade');
+             quantidade.addEventListener('keyup',()=>{
+                pegaPokemons(quantidade.value);
+             })
+            pegaPokemons(2);
+                
+               function pegaPokemons(quantidade){
+                   //requisicao na api pokemon, para recuperar 10 pokemons
+              fetch('https://pokeapi.co/api/v2/pokemon?limit='+quantidade) 
+                .then(response => response.json())
+                .then(allpokemon => { //faz uma funcao para trazer os pokemons
+                   
+                    var pokemons = []; //criar uma array para amarzenar os pokemons
+
+                    allpokemon.results.map((val)=>{
+                        // console.log(val) //consigo ver o que esta retornando no objeto
+                        //pokemons.push({nome:val.name});
+
+                        fetch(val.url) //consulta do array dos pokemons
+                        .then(response => response.json())
+                        .then(pokemonSingle => {
+                            //console.log(pokemonSingle); //trazendo as informacoes dos mesmo pokemons
+                            pokemonSingle.sprites.front_default;
+                            pokemons.push({nome:val.name, imagen:pokemonSingle.sprites.front_default}); //traz as informacoes com a imagem
+
+                            //teste
+                            //finalizamos nossas requisicoes
+                            if(pokemons.length == quantidade){
+                                
+                               var pokemonBoxes = document.querySelector('.pokemon-boxes')
+                               pokemonBoxes.innerHTML = '';
+
+                                //console.log(pokemons); //tras nomes e imagens
+                                pokemons.map(function(val){
+                                    //console.log(val) //tras os objetos
+                                pokemonBoxes.innerHTML+=`
+                                    <div class="pokemon-box">
+                                    <img src="`+val.imagen+`" />
+                                    <p>`+val.nome+`</p>
+                                    </div>
+                                    `
+                                });
+                            }
+
+                        })
+
+                    })
+
+                    pokemons.map((val)=>{
+                        console.log(val.nome) //informacoes do pokemon "nome"
+                    })
+                }) 
+               } 
+
+        </script>
+
+    </body>
+</html>

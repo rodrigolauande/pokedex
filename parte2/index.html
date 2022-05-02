@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Pokedex</title>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <div class="main">
+            <h2>Pokedex</h2>
+
+            <div class="pokemon-boxes">
+
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                <div class="pokemon-box">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"> <!--pego de uma api-->
+                    <p>Dito</p>
+                </div>
+                
+            </div><!--pokemon-boxes-->
+
+        </div>
+
+        <script>
+                //requisicao na api pokemon, para recuperar 10 pokemons
+              fetch('https://pokeapi.co/api/v2/pokemon?limit=10') //
+                .then(response => response.json())
+                .then(allpokemon => { //faz uma funcao para trazer os pokemons
+                   
+                    var pokemons = []; //criar uma array para amarzenar os pokemons
+
+                    allpokemon.results.map((val)=>{
+                        // console.log(val) //consigo ver o que esta retornando no objeto
+                        //pokemons.push({nome:val.name});
+
+                        fetch(val.url) //consulta do array dos pokemons
+                        .then(response => response.json())
+                        .then(pokemonSingle => {
+                            //console.log(pokemonSingle); //trazendo as informacoes dos mesmo pokemons
+                            pokemonSingle.sprites.front_default;
+                            pokemons.push({nome:val.name, imagen:pokemonSingle.front_default}); //traz as informacoes com a imagem
+
+                            //teste
+                            //finalizamos nossas requisicoes
+                            if(pokemons.length == 10){
+                                console.log(pokemons); //tras nomes e imagens
+                            }
+
+                        })
+
+                    })
+
+                    pokemons.map((val)=>{
+                        console.log(val.nome) //informacoes do pokemon "nome"
+                    })
+                }) 
+
+        </script>
+
+    </body>
+</html>
